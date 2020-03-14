@@ -40,8 +40,8 @@ public class ExampleApp {
             key = keyGenerator.generateKey();
         }
 
-        final Instant now = Instant.now();
-        final Instant later = now.plus(totp.getTimeStep());
+        final long now = System.currentTimeMillis();
+        final long later = now+(totp.getTimeStep());
 
         System.out.format("Current password: %06d\n", totp.generateOneTimePassword(key, now));
         System.out.format("Future password:  %06d\n", totp.generateOneTimePassword(key, later));

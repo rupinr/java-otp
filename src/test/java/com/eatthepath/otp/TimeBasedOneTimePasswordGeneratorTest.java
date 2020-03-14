@@ -58,7 +58,7 @@ public class TimeBasedOneTimePasswordGeneratorTest extends HmacOneTimePasswordGe
 
     @Test
     void testGetTimeStep() throws NoSuchAlgorithmException {
-        final Duration timeStep = Duration.ofSeconds(97);
+        final int timeStep = 97;
 
         final TimeBasedOneTimePasswordGenerator totp =
                 new TimeBasedOneTimePasswordGenerator(timeStep);
@@ -78,9 +78,9 @@ public class TimeBasedOneTimePasswordGeneratorTest extends HmacOneTimePasswordGe
     void testGenerateOneTimePassword(final String algorithm, final Key key, final long epochSeconds, final int expectedOneTimePassword) throws Exception {
 
         final TimeBasedOneTimePasswordGenerator totp =
-                new TimeBasedOneTimePasswordGenerator(Duration.ofSeconds(30), 8, algorithm);
+                new TimeBasedOneTimePasswordGenerator(30, 8, algorithm);
 
-        final Instant timestamp = Instant.ofEpochSecond(epochSeconds);
+        final long timestamp = epochSeconds;
 
         assertEquals(expectedOneTimePassword, totp.generateOneTimePassword(key, timestamp));
     }
